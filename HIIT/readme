@@ -1,0 +1,15 @@
+
+
+#HIIT Workout App
+Overview
+This HIIT (High-Intensity Interval Training) Workout App allows users to select and carry out customizable workout routines. With a user-friendly interface, it provides a seamless experience for users to engage in efficient and effective workouts.
+
+Features
+Workout Selection: Users can choose from a variety of pre-designed HIIT workout routines or create their own custom routines.
+
+Install dependencies using npm:
+Copy code
+npm install
+or
+Run the app locally:
+npm start

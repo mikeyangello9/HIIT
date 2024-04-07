@@ -1,0 +1,20 @@
+{
+  "name": "hiitapp",
+  "version": "1.0.0",
+  "description": "the application allows users to select workouts and carry them out at a set interval",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "exercise",
+    "HIIT",
+    "workout"
+  ],
+  "author": "Michael Aiwekhoe",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.3",
+    "sqlite3": "^5.1.7"
+  }
+}

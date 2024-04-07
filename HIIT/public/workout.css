@@ -1,0 +1,158 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Space Mono", monospace;
+    
+}
+
+.workout-instances{
+    padding: 1rem;
+}
+.workout-instance{
+    position: absolute;
+    padding: 1rem;
+    width: 400px;
+    border: 1px solid black;
+    margin: 0 auto;
+    border-radius: 1rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* From https://css.glass */
+    
+}
+
+
+.workout-instance > .elem{
+    margin-top: 2rem;
+}
+
+.name{
+    background: black;
+    width: fit-content;
+    color: rgb(0, 0, 0);
+    padding: .5rem;
+    border-radius: 1rem;
+}
+
+.time{
+    display: flex;
+    justify-content: center;
+    background: black;
+    margin: 0 auto;
+    width: fit-content;
+    padding: .5rem;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+}
+.pause{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+   
+}
+
+.pause-button{
+    padding: .2rem;
+    border-radius: 10px;
+    background: none;
+}
+
+.pause-button:hover{
+    background: black;
+    color: rgb(255, 255, 255);
+}
+
+.control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gif{
+    
+    /* background: grey; */
+    padding: 1rem;
+    object-fit: cover;
+    text-align: center;
+    border-radius: 10px;
+    height: 4rem;
+}
+
+.gif-start{
+    width: 100%;
+    
+    
+}
+
+
+
+.resume-button{
+    padding: .2rem;
+    border-radius: 10px;
+    background: none;
+}
+
+@media(min-width:390px){
+
+    .workout-instance{
+        width: 300px;
+    }
+    .container{
+        padding: 1rem;
+    }
+}
+
+.glass{
+    
+    /* From https://css.glass */
+    background: rgba(161, 255, 11, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(87, 248, 24, 0.1);
+    backdrop-filter: blur(4.2px);
+    -webkit-backdrop-filter: blur(4.2px);
+    border: 1px solid rgba(11, 255, 72, 0.54);
+}
+
+.workout-end{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(146, 146, 146);
+    padding: .5rem;
+    border-radius: 10px;
+}
+
+.workout-info{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 2rem;
+    
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    color: greenyellow;
+}
+
+.workout-info > li{
+    padding: .5rem;
+    background: black;
+    color: yellowgreen;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+.heading > li{
+    padding: 1rem;
+}
+
+
+.rest-time{
+    display: none;
+}
