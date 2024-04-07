@@ -34,10 +34,11 @@ body{
 
 
 .date{
-    background: rgb(255, 81, 0);
+    background: #adff2f;
     padding: 4px;
     border-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
+    
 
 }
 .greet-user{
