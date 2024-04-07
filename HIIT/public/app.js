@@ -55,6 +55,7 @@ for(let i = 0; i < 7; i++){
 
 // dashboard
 const totalDuration = document.querySelector(".total-duration");
+const totalworkoutsSelected = document.querySelector(".total-workouts");
 
 
 const selectionButtons = document.querySelectorAll('.select-work');
@@ -161,7 +162,7 @@ const selectWorkouts = (index) => {
 
    
    
-    // dataExtract = [];
+    dataExtract = [];
 
     
     lastElem.forEach(element => {
@@ -392,6 +393,10 @@ const logInput = () => {
 
 
 //  button function
+setInterval(() => {
+    totalworkoutsSelected.textContent = `Total workout selecte: ${dataExtract.length}`
+},1000)
+
 
             
 
