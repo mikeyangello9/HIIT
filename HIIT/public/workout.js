@@ -97,16 +97,16 @@ fetch('/workout').then((response) => {
             workoutTrack = restArray[currentWorkoutIndex];
             gifTrack = gifArray[currentWorkoutIndex];
             restTime = restIncluded[currentWorkoutIndex];
-            console.log("check")
-            pauseButton.style.display = "none"
-            resumeButton.style.display = "none"
+            console.log("check");
+            pauseButton.style.display = "none";
+            resumeButton.style.display = "none";
         }
         else if(currentWorkoutIndex % 2 === 0){
                 workoutTrack = restArray[currentWorkoutIndex];
                 gifTrack = gifArray[currentWorkoutIndex];
                 restTime = restIncluded[currentWorkoutIndex];
-                pauseButton.style.display = "block"
-                resumeButton.style.display = "block"
+                pauseButton.style.display = "block";
+                resumeButton.style.display = "block";
                 
         }
         

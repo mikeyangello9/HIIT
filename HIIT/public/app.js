@@ -81,6 +81,37 @@ const customRest = document.querySelector("#rest");
 const addCustomWorkout = document.querySelector(".add-button");
 
 
+const intensitySelector = document.querySelector(".workout-intensity");
+const intensityList = document.getElementById("intensity-list");
+const changeDuration = document.querySelectorAll(".time");
+const changeRest = document.querySelectorAll(".rest-time");
+
+// select intensity of workout
+intensityList.addEventListener("change", () => {
+    const difficultyList = intensityList.selectedOptions;
+    let level;
+    for(let i = 0; i < difficultyList.length; i++){
+        console.log(difficultyList[i]);
+
+        if(difficultyList[i].text === "Light"){
+            level = difficultyList[i].value    
+        }
+        else if(difficultyList[i].text === "Medium"){
+            level = difficultyList[i].value
+        }
+        else if(difficultyList[i].text === "Intense"){
+            level = difficultyList[i].value
+        }
+    }
+
+    console.log(level)
+    changeRest.forEach((exercise, index) => {
+        exercise.textContent = level;
+        // changeDuration[index].textContent = 
+        
+    })
+})
+
 customiseButton.addEventListener('click', () => {
     customHub.style.display = "block";
 });
@@ -93,23 +124,25 @@ closeCustomHub.addEventListener('click', () => {
 
 
 
-
-
-
-let selectedWorkoutArray = [];
-
-if(selectedWorkouts.innerHTML === ""){
-    console.log("Here");
-    start.disabled = true;
-    start.style.background = "none"
-}
-
 const startHandler = () => {
      // start button 
      start.disabled = false;
      start.style.background = "#adff2f"
      start.style.color = "black"
 }
+
+
+
+let selectedWorkoutArray = [];
+const divContent = selectedWorkouts.innerHTML
+
+
+// before sele3ctions of workouts
+if(divContent === ""){
+    start.disabled = true;
+    start.style.background = "none";
+}
+
 
 
 // handle workout selections
@@ -147,9 +180,6 @@ const serve = (userSelection) => {
 
 
 
-
-let dataExtract = [];
-
 const selectWorkouts = (index) => {
     selectedWorkouts.appendChild(workouts[index].cloneNode(true));
 
@@ -160,26 +190,34 @@ const selectWorkouts = (index) => {
 
     startHandler();
 
-   
-   
-    dataExtract = [];
+    let dataExtract = [];
 
     
     lastElem.forEach(element => {
-        const workoutServerData = {
+
+       const workoutServerData = {
             duration:element.querySelector(".time").textContent,
             name:element.querySelector(".workout-name").textContent,
             gif:element.querySelector(".gifs").src,
             rest:element.querySelector(".rest-time").textContent,
+            type:"premade"
         }
-        dataExtract.push(workoutServerData);
-        
-    
 
+        dataExtract.push(workoutServerData);
         console.log(dataExtract)
         serve(dataExtract)
+
+        if(dataExtract.length != 0){
+            customiseButton.disabled = true;
+            customiseButton.style.color = "grey";
+        }
+
+        if(dataExtract.length == 0){
+            console.log("empty")
+        }
+        
     });
-   
+
     const afterSelections = selectedWorkouts.querySelectorAll(".select-work");
     afterSelections.forEach(afterSelection => {
         afterSelection.remove();
@@ -192,6 +230,7 @@ const selectWorkouts = (index) => {
         // get content and restyle
 
         indication.style.background = '#adff2f';
+        indication.style.color = 'black';
         indication.style.marginTop = '5px';
         indication.style.borderRadius = '10px'; 
         indication.style.height = 'auto'; 
@@ -200,8 +239,6 @@ const selectWorkouts = (index) => {
         indication.style.padding = '1rem'; 
         indication.style.overflow = 'auto';
         
-        
-    
         // Display remove button
         removeButtons[index].style.display = 'block';
         removeButtons[index].textContent = 'X';
@@ -229,12 +266,10 @@ const selectWorkouts = (index) => {
         }
         if (descDiv) {
             descDiv.style.marginTop = "0px";
+            desc.style.color = "black";
         }
-       
-            
+  
     });
-
-    
 
     que.style.display = "block";
     que.textContent = "workout Selected";
@@ -248,8 +283,7 @@ const selectWorkouts = (index) => {
 let lastArray = [];
 
 const removeWorkouts = event => {
-   
-    
+
     const removed = selectedWorkouts.querySelectorAll('.workout');
     console.log(removed.length);
 
@@ -267,40 +301,40 @@ const removeWorkouts = event => {
     parentElement.remove();
 
     updatedArray.splice(index, 1); // remove one element from the ever changing index
-    
-   
- 
 
     // if target is removed update array accordingly
-    
-    
     console.log(updatedArray)
     selectedWorkoutArray[selectedWorkoutArray.length - 1] = updatedArray;
 
     
     const dataRemoved = [];
+    
     updatedArray.forEach(element => {
        
-
         const updatedWorkoutServerData = {
             duration:element.querySelector(".time").textContent,
             name:element.querySelector(".workout-name").textContent,
             gif:element.querySelector(".gifs").src,
-            rest:element.querySelector(".rest-time").textContent
+            rest:element.querySelector(".rest-time").textContent,
+            type: "premade"
         }
         dataRemoved.push(updatedWorkoutServerData);
-      
-        // dataRemoved.push(element.querySelector(".time"))
         console.log(dataRemoved)
         serve(dataRemoved)
+       
     });
 
     if(updatedArray.length === 0){
         console.log("should be empty")
         dataRemoved.push([]);
         start.disabled = true;
-        start.style.background = "grey";
+        start.style.background = "none";
+        start.style.color = "white";
         serve(dataRemoved);
+
+        // allow user to customise workouts
+        customiseButton.disabled = false;
+        customiseButton.style.color = "";
     }
 
     que.style.display = "block"
@@ -309,98 +343,151 @@ const removeWorkouts = event => {
     setTimeout(() =>{
         que.style.display = "none";
     },3000)
-    
-
-        
+  
 }
-
-
 
 // select workouts by appending to empty div upon user input
 selectionButtons.forEach((selectionButton, index) => {
-    
     selectionButton.addEventListener('click', () => selectWorkouts(index));
-
     // remove unwanted/mistake selections and update array 
     removeButtons[index].addEventListener('click', removeWorkouts);
-
-    
 });
 
 
 console.log(selectedWorkoutArray)
+
 const logInput = () => {
 
     let removeCustomWorkouts = document.createElement("button");
-    let customWorkoutData;
-
-
-    startHandler();
-    console.log(customDescription.value)
-    console.log(customDuration.value)
-    console.log(customWorkout.value)
-    console.log(customRest.value)
-    customWorkoutData = {
-        duration:customDuration.value,
-        name:customWorkout.value,
-        gif:"",
-        rest:customRest.value
-    }
-    // append to selectedworkouts array
-
     const customWorkoutDiv = document.createElement("div");
+    customWorkoutDiv.className = "custom-workout";
+
     const customDesc = document.createElement("p");
-   
-    removeCustomWorkouts.textContent = "X";
-    removeCustomWorkouts.style.border = "none";
-    removeCustomWorkouts.style.padding = "8px";
-    removeCustomWorkouts.style.borderRadius = "8px";
-    customDesc.style.padding = "8px";
 
-   
-    
-    
+    const selectedCustomRest = document.createElement("p")
+    selectedCustomRest.className = "custom-rest";
+    selectedCustomRest.style.display = "none"
 
+    const customName = document.createElement("p")
+    customName.className = "custom-name";
+    customName.style.display = "none"
 
-    const removeCustomWorkoutsfunc = (event) => {
-        const workoutDiv = removeCustomWorkouts.parentElement;
-        workoutDiv.remove();
-        dataExtract.pop(customWorkoutData);
-        serve(dataExtract);
-        start.disabled = "true"
-        start.style.color= "grey"
-    }
-    
-    
-    removeCustomWorkouts.addEventListener('click', removeCustomWorkoutsfunc)
-    
-        
+    const selectedCustomDuration = document.createElement("p")
+    selectedCustomDuration.className = "custom-duration";
+    selectedCustomDuration.style.display = "none"
 
+    selectedWorkouts.append(customWorkoutDiv);
+    selectedWorkoutArray.push(selectedWorkouts.querySelectorAll('.custom-workout'));
+    const lastCustomElem = selectedWorkoutArray[selectedWorkoutArray.length - 1];
+    console.log(lastCustomElem)
 
-    customDesc.textContent = `Workout-name:${customWorkoutData.name}, Duration:${customWorkoutData.duration}`
+    //
+
+    customDesc.textContent = `Workout-name:${customWorkout.value}, Duration:${customDuration.value}`
+    customName.textContent = customWorkout.value;
+    selectedCustomDuration.textContent = customDuration.value;
+    selectedCustomRest.textContent = customRest.value;
+
     customWorkoutDiv.style.display = "flex";
     customWorkoutDiv.style.justifyContent = "space-around";
     customWorkoutDiv.style.background = "orange";
     customWorkoutDiv.style.padding = "10px";
     customWorkoutDiv.style.borderRadius = "10px";
     customWorkoutDiv.append(customDesc);
+    customWorkoutDiv.append(customName);
+    customWorkoutDiv.append(selectedCustomDuration);
+    customWorkoutDiv.append(selectedCustomRest);
     customWorkoutDiv.append(removeCustomWorkouts);
 
-    selectedWorkouts.append(customWorkoutDiv);
-    dataExtract.push(customWorkoutData);
-    serve(dataExtract);
-}
+
+    startHandler();
+    let customDataExtract = [];
+    
+    lastCustomElem.forEach(element => {
+        console.log(element)
+        const customWorkoutData = {
+            duration:element.querySelector(".custom-duration").textContent,
+            name:element.querySelector(".custom-name").textContent,
+            gif:"",
+            rest:element.querySelector(".custom-rest").textContent,
+            type: "custom"
+        }
+        customDataExtract.push(customWorkoutData);
+        console.log(customDataExtract);
+        serve(customDataExtract);
+        if(customDataExtract.length != 0 ){
+            selectionButtons.forEach((button) => {
+                button.disabled = true;
+                button.style.background = "grey";
+                button.style.color = "white";
+            })
+        }
+        
+    })
+    
+    // append to selectedworkouts array
+
+    removeCustomWorkouts.textContent = "X";
+    removeCustomWorkouts.style.border = "none";
+    removeCustomWorkouts.style.padding = "8px";
+    removeCustomWorkouts.style.borderRadius = "8px";
+    customDesc.style.padding = "8px";
 
 
-//  button function
-setInterval(() => {
-    totalworkoutsSelected.textContent = `Total workout selecte: ${dataExtract.length}`
-},1000)
+    let lastCustomArray = []
+    const removeCustomWorkoutsfunc = (event) => {
+        const workoutDiv = event.target.parentElement;
+       
 
+        // remove from array
+        // const parentElement = event.target.parentElement;
+        let index = Array.from(workoutDiv.parentElement.children).indexOf(workoutDiv);
+        console.log(index)
+       
+        lastCustomArray = selectedWorkoutArray[selectedWorkoutArray.length - 1];
+        const updatedCustomArray = Array.from(lastCustomArray);
+        workoutDiv.remove();
+        updatedCustomArray.splice(index, 1);
 
+        selectedWorkoutArray[selectedWorkoutArray.length - 1] = updatedCustomArray;
+        console.log(updatedCustomArray)
+
+        let customDataRemoved  = [];
+
+        updatedCustomArray.forEach(element => {
+            console.log(element)
+            const updatedCustomData = {
+                duration:element.querySelector(".custom-duration").textContent,
+                name:element.querySelector(".custom-name").textContent,
+                gif:"",
+                rest:element.querySelector(".custom-rest").textContent,
+                type: "custom"
+            }
+            customDataRemoved.push(updatedCustomData)
+            console.log(customDataRemoved);
+            serve(customDataRemoved);
+        })
+
+        if(updatedCustomArray.length == 0){
+            customDataRemoved.push([]);
+            start.disabled = true;
+            start.style.background = "none";
+            start.style.color = "white";
+
+            selectionButtons.forEach((button) => {
+                button.style.color = "black";
+                button.style.background = "";
+                button.disabled = false;
+            })
             
+            serve(customDataRemoved);
+        };
 
-
+    }
+    
+    removeCustomWorkouts.addEventListener('click', removeCustomWorkoutsfunc)
+ 
+}
 addCustomWorkout.addEventListener('click',logInput);
 
 
