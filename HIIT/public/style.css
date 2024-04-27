@@ -230,12 +230,14 @@ body{
 .desc-container{
     padding: 0.5rem;
     margin-top: 120px;
+    
 
 }
 
 .desc{
     text-align: center;
     color: white;
+    font-size: medium;
 }
 
 .description{

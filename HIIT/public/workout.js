@@ -1,5 +1,31 @@
-let instance= document.querySelector(".workout-instance");
+// countdown
+const countDown = document.querySelector(".countdown-display");
+const values = ["3", "2", "1", "Go!!"];
+let index = 0;
 
+const countdownInterval = setInterval(() => {
+    if(index < values.length){
+    countDown.textContent = values[index]; // update the value of index if it's value is less than the array length 
+    index++;
+}
+else{
+    clearInterval(countdownInterval);
+    countDown.style.display = "none";
+}
+}, 1000)
+
+
+
+
+let instance= document.querySelector(".workout-instance");
+let nextWorkout = document.querySelector(".next-workout");
+let workoutInfo = document.querySelector(".current-workout-desc");
+instance.style.display = "none";
+nextWorkout.style.display = "none";
+workoutInfo.style.display = "none";
+setTimeout(() => {
+
+instance.style.display = "block";
 let gif = document.querySelector(".gif-start");
 
 let pauseButton = document.querySelector(".pause-button");
@@ -32,6 +58,7 @@ let restIncluded = [];
 let gifArray = [];
 let restArray = [];
 
+// alert user that work is about to start
 
 fetch('/workout').then((response) => {
 
@@ -55,7 +82,8 @@ fetch('/workout').then((response) => {
    let totalDuration = totalArray.reduce((acc, cur) => acc + cur, 0)
    console.log(totalDuration);
 
-   for(let i = 0; i < data.workout.length; i++){
+    let showNext;
+    for(let i = 0; i < data.workout.length; i++){
         restIncluded.push(data.workout[i].duration);
         restArray.push(data.workout[i].name);
         gifArray.push(data.workout[i].gif);
@@ -63,14 +91,19 @@ fetch('/workout').then((response) => {
             restIncluded.push(data.workout[i].rest);
             restArray.push("REST");
             gifArray.push("./gifs/resting.gif");
+        };
+        showNext = restArray[i + 1];
+        console.log(showNext)
 
-        }
 
    }
 
    console.log(restIncluded)
    console.log(gifArray)
    console.log(restArray)
+
+   // show next workout
+
 
 
 
@@ -119,6 +152,7 @@ fetch('/workout').then((response) => {
             console.log(currentWorkoutIndex)
             if(currentWorkoutIndex < restIncluded.length){
                 startNextWorkout();
+                console.log(restArray[currentWorkoutIndex + 1]);
 
                 // workout rest alternation
 
@@ -188,3 +222,5 @@ window.addEventListener("beforeunload", (e) => {
     console.log("Going back");
     e.preventDefault()
 })
+}, 5000)
+

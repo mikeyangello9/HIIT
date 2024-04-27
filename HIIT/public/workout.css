@@ -6,9 +6,22 @@
     
 }
 
+.countdown-display{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 10px;
+    font-weight: bolder;
+    padding: 3rem;
+    background-color: orange;
+}
+
 .workout-instances{
     padding: 1rem;
 }
+
 .workout-instance{
     position: absolute;
     padding: 1rem;
@@ -20,8 +33,28 @@
     top: 50%;
     transform: translate(-50%, -50%);
     
-    /* From https://css.glass */
     
+    
+}
+
+
+.info{
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    top: 20%;
+    left: 50%;
+    transform: translate(-55%, -50%);
+}
+
+.next-workout{
+    padding: 10px;
+    border: 1px solid black;
+}
+.current-workout-desc{
+    padding: 10px;
+    border: 1px solid black;
 }
 
 

@@ -94,13 +94,13 @@ intensityList.addEventListener("change", () => {
         console.log(difficultyList[i]);
 
         if(difficultyList[i].text === "Light"){
-            level = difficultyList[i].value    
+            level = difficultyList[i].value;    
         }
         else if(difficultyList[i].text === "Medium"){
-            level = difficultyList[i].value
+            level = difficultyList[i].value;
         }
         else if(difficultyList[i].text === "Intense"){
-            level = difficultyList[i].value
+            level = difficultyList[i].value;
         }
     }
 
@@ -125,7 +125,7 @@ closeCustomHub.addEventListener('click', () => {
 
 
 const startHandler = () => {
-     // start button 
+     // start button
      start.disabled = false;
      start.style.background = "#adff2f"
      start.style.color = "black"
@@ -204,8 +204,8 @@ const selectWorkouts = (index) => {
         }
 
         dataExtract.push(workoutServerData);
-        console.log(dataExtract)
-        serve(dataExtract)
+        console.log(dataExtract);
+        serve(dataExtract);
 
         if(dataExtract.length != 0){
             customiseButton.disabled = true;
@@ -213,7 +213,7 @@ const selectWorkouts = (index) => {
         }
 
         if(dataExtract.length == 0){
-            console.log("empty")
+            console.log("empty");
         }
         
     });
@@ -276,8 +276,8 @@ const selectWorkouts = (index) => {
     que.style.background = "#adff2f"
     setTimeout(() =>{
         que.style.display = "none"
-    },3000)
-}
+    },3000);
+};
 
 // handle remove workout
 let lastArray = [];
@@ -319,8 +319,8 @@ const removeWorkouts = event => {
             type: "premade"
         }
         dataRemoved.push(updatedWorkoutServerData);
-        console.log(dataRemoved)
-        serve(dataRemoved)
+        console.log(dataRemoved);
+        serve(dataRemoved);
        
     });
 
@@ -366,20 +366,20 @@ const logInput = () => {
 
     const selectedCustomRest = document.createElement("p")
     selectedCustomRest.className = "custom-rest";
-    selectedCustomRest.style.display = "none"
+    selectedCustomRest.style.display = "none";
 
     const customName = document.createElement("p")
     customName.className = "custom-name";
-    customName.style.display = "none"
+    customName.style.display = "none";
 
     const selectedCustomDuration = document.createElement("p")
     selectedCustomDuration.className = "custom-duration";
-    selectedCustomDuration.style.display = "none"
+    selectedCustomDuration.style.display = "none";
 
     selectedWorkouts.append(customWorkoutDiv);
     selectedWorkoutArray.push(selectedWorkouts.querySelectorAll('.custom-workout'));
     const lastCustomElem = selectedWorkoutArray[selectedWorkoutArray.length - 1];
-    console.log(lastCustomElem)
+    console.log(lastCustomElem);
 
     //
 
