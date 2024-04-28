@@ -1,6 +1,6 @@
 // countdown
 const countDown = document.querySelector(".countdown-display");
-const values = ["3", "2", "1", "Go!!"];
+const values = ["3", "2", "1", "GO"];
 let index = 0;
 
 const countdownInterval = setInterval(() => {
@@ -19,10 +19,12 @@ else{
 
 let instance= document.querySelector(".workout-instance");
 let nextWorkout = document.querySelector(".next-workout");
-let workoutInfo = document.querySelector(".current-workout-desc");
+
+let nextWorkoutImage = document.querySelector(".next-image");
 instance.style.display = "none";
 nextWorkout.style.display = "none";
-workoutInfo.style.display = "none";
+
+nextWorkoutImage.style.display = "none";
 setTimeout(() => {
 
 instance.style.display = "block";
@@ -57,6 +59,7 @@ let count = 0;
 let restIncluded = [];
 let gifArray = [];
 let restArray = [];
+let imageArray = [];
 
 // alert user that work is about to start
 
@@ -82,26 +85,25 @@ fetch('/workout').then((response) => {
    let totalDuration = totalArray.reduce((acc, cur) => acc + cur, 0)
    console.log(totalDuration);
 
-    let showNext;
     for(let i = 0; i < data.workout.length; i++){
         restIncluded.push(data.workout[i].duration);
         restArray.push(data.workout[i].name);
         gifArray.push(data.workout[i].gif);
+        imageArray.push(data.workout[i].image);
         if(i !== data.workout.length - 1){
             restIncluded.push(data.workout[i].rest);
             restArray.push("REST");
             gifArray.push("./gifs/resting.gif");
+            imageArray.push("./images/restingimage.jpg");
         };
-        showNext = restArray[i + 1];
-        console.log(showNext)
+      
 
 
    }
-
    console.log(restIncluded)
    console.log(gifArray)
    console.log(restArray)
-
+   console.log(imageArray)
    // show next workout
 
 
@@ -147,12 +149,13 @@ fetch('/workout').then((response) => {
         if(remainingTime <= 0){
             clearInterval(intervalID);
             console.log("time exhausted");
-
+            nextWorkoutImage.src = "./images/workoutsomplete.png";
+            nextWorkout.textContent = "Well Done!!"
+                
             currentWorkoutIndex++;
             console.log(currentWorkoutIndex)
             if(currentWorkoutIndex < restIncluded.length){
                 startNextWorkout();
-                console.log(restArray[currentWorkoutIndex + 1]);
 
                 // workout rest alternation
 
@@ -163,7 +166,7 @@ fetch('/workout').then((response) => {
                 resumeButton.disabled = true;
                 instance.remove();
 
-            
+                
                 usedTime.textContent = `${totalDuration}s was spent!`;
                 workoutCount.textContent = `${data.workout.length} workout(s) were completed!`;
                 workoutEnd.style.display = "block";
@@ -175,10 +178,27 @@ fetch('/workout').then((response) => {
         duration.textContent = remainingTime
         gif.src = gifTrack  
         workoutName.textContent = workoutTrack  
+        
+        nextWorkout.style.display ="block";
+        // nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}`;
+        nextWorkoutImage.style.display = "block";
+        // nextWorkoutImage.src = imageArray[currentWorkoutIndex + 1];
+
+        if(currentWorkoutIndex + 1 < restArray.length){
+            nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}`;
+            nextWorkoutImage.src = imageArray[currentWorkoutIndex + 1];
+        }
+        else{
+            nextWorkout.textContent =`workouts exhausted`;
+            nextWorkoutImage.src = "";
+        }
+
 
         
         
     }
+
+   
 
     const startNextWorkout = () => {
         startTime = new Date().getTime();
@@ -194,6 +214,8 @@ fetch('/workout').then((response) => {
         startTime = new Date().getTime() - elapsedtime * 1000;
         console.log(startTime);
         intervalID = setInterval(updateTimer, 1000);
+        pauseButton.disabled = false;
+        
     })
     
     pauseButton.addEventListener('click',() => {
@@ -202,6 +224,7 @@ fetch('/workout').then((response) => {
         clearInterval(intervalID);
         elapsedtime = Math.floor((currentTime - startTime) / 1000);
         console.log(elapsedtime);
+        pauseButton.disabled = true;
     })
 
     
@@ -219,7 +242,7 @@ fetch('/workout').then((response) => {
 
 
 window.addEventListener("beforeunload", (e) => {
-    console.log("Going back");
+    console.log("Going somewhere?")
     e.preventDefault()
 })
 }, 5000)

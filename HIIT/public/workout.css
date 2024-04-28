@@ -11,11 +11,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid black;
     border-radius: 10px;
     font-weight: bolder;
     padding: 3rem;
-    background-color: orange;
+    font-size: 9rem;
+    
 }
 
 .workout-instances{
@@ -43,20 +43,34 @@
     display: flex;
     justify-content: space-around;
     gap: 1rem;
-    top: 20%;
+    top: 15%;
     left: 50%;
-    transform: translate(-55%, -50%);
+    transform: translate(-50%, -50%);
+    
 }
 
 .next-workout{
     padding: 10px;
     border: 1px solid black;
+    border-radius: 10px;
+
+    background: rgba(161, 255, 11, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(87, 248, 24, 0.1);
+    backdrop-filter: blur(4.2px);
+    -webkit-backdrop-filter: blur(4.2px);
+    border: 1px solid rgba(11, 255, 72, 0.54);
 }
 .current-workout-desc{
     padding: 10px;
     border: 1px solid black;
 }
 
+.next-image{
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
 
 .workout-instance > .elem{
     margin-top: 2rem;
@@ -84,6 +98,7 @@
     display: flex;
     justify-content: center;
     padding: 1rem;
+    border: none;
    
 }
 
@@ -91,10 +106,12 @@
     padding: .2rem;
     border-radius: 10px;
     background: none;
+    font-size: 2rem;
+    border: none;
 }
 
 .pause-button:hover{
-    background: black;
+    border: 2px solid lightskyblue;
     color: rgb(255, 255, 255);
 }
 
@@ -126,6 +143,8 @@
     padding: .2rem;
     border-radius: 10px;
     background: none;
+    font-size: 2rem;
+    border: none;
 }
 
 @media(min-width:390px){
@@ -165,6 +184,7 @@
     justify-content: space-between;
     list-style: none;
     padding: 2rem;
+    gap: 2rem;
     
 }
 .heading{

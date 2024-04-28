@@ -200,7 +200,8 @@ const selectWorkouts = (index) => {
             name:element.querySelector(".workout-name").textContent,
             gif:element.querySelector(".gifs").src,
             rest:element.querySelector(".rest-time").textContent,
-            type:"premade"
+            type:"premade",
+            image: element.querySelector(".workout-image").src,
         }
 
         dataExtract.push(workoutServerData);
@@ -316,7 +317,8 @@ const removeWorkouts = event => {
             name:element.querySelector(".workout-name").textContent,
             gif:element.querySelector(".gifs").src,
             rest:element.querySelector(".rest-time").textContent,
-            type: "premade"
+            type: "premade",
+            image: element.querySelector(".workout-image").src,
         }
         dataRemoved.push(updatedWorkoutServerData);
         console.log(dataRemoved);
@@ -461,7 +463,7 @@ const logInput = () => {
                 name:element.querySelector(".custom-name").textContent,
                 gif:"",
                 rest:element.querySelector(".custom-rest").textContent,
-                type: "custom"
+                type: "custom",
             }
             customDataRemoved.push(updatedCustomData)
             console.log(customDataRemoved);

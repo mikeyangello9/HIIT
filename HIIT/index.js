@@ -26,7 +26,7 @@ app.post('/', (req, res) => {
     
     try {
         // sql = {name, duration, gif, rest, type}
-        console.log(req.body.workout[0].duration);
+        console.log(req.body);
         workoutData = req.body;
         return res.json({
         status:200,
@@ -39,7 +39,7 @@ app.post('/', (req, res) => {
             success: false,
             
         })
-        console.log(error)
+        console.log(error);
     }
     
  
