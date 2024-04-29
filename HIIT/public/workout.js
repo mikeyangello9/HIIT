@@ -3,16 +3,24 @@ const countDown = document.querySelector(".countdown-display");
 const values = ["3", "2", "1", "GO"];
 let index = 0;
 
-const countdownInterval = setInterval(() => {
-    if(index < values.length){
-    countDown.textContent = values[index]; // update the value of index if it's value is less than the array length 
-    index++;
+
+
+
+const countdownfunc = (countdownItems, element) => {
+    const countdownInterval = setInterval(() => {
+        if(index < countdownItems.length){
+        countDown.textContent = countdownItems[index]; // update the value of index if it's value is less than the array length 
+        index++;
+    }
+    else{
+        clearInterval(countdownInterval);
+        element.style.display = "none";
+    }
+    }, 1000)
 }
-else{
-    clearInterval(countdownInterval);
-    countDown.style.display = "none";
-}
-}, 1000)
+
+
+countdownfunc(values, countDown)
 
 
 
@@ -60,6 +68,8 @@ let restIncluded = [];
 let gifArray = [];
 let restArray = [];
 let imageArray = [];
+
+const informUser = document.querySelector(".inform-user");
 
 // alert user that work is about to start
 
@@ -126,7 +136,6 @@ fetch('/workout').then((response) => {
         
         
         console.log(remainingTime);
-        console.log(currentWorkoutIndex)
 
         if(currentWorkoutIndex  % 2 === 1){
             workoutTrack = restArray[currentWorkoutIndex];
@@ -149,8 +158,8 @@ fetch('/workout').then((response) => {
         if(remainingTime <= 0){
             clearInterval(intervalID);
             console.log("time exhausted");
-            nextWorkoutImage.src = "./images/workoutsomplete.png";
-            nextWorkout.textContent = "Well Done!!"
+            
+            
                 
             currentWorkoutIndex++;
             console.log(currentWorkoutIndex)
@@ -185,12 +194,33 @@ fetch('/workout').then((response) => {
         // nextWorkoutImage.src = imageArray[currentWorkoutIndex + 1];
 
         if(currentWorkoutIndex + 1 < restArray.length){
-            nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}`;
+            nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}, workout(s) -- ${currentWorkoutIndex + 1} / ${restArray.length}`;
             nextWorkoutImage.src = imageArray[currentWorkoutIndex + 1];
         }
         else{
             nextWorkout.textContent =`workouts exhausted`;
             nextWorkoutImage.src = "";
+        }
+
+        // inform user of change
+
+        if(remainingTime <= 5){
+            console.log("get ready to change");   
+            instance.style.border = "5px dotted #adff2f";
+            informUser.style.display = "block"
+            informUser.textContent= `GET READY TO CHANGE...`
+
+            
+        }
+        else{
+            instance.style.border = "1px solid black";
+            informUser.style.display = "none";
+            
+        }
+
+        if(remainingTime == 0){
+            informUser.style.display = "none";
+
         }
 
 
