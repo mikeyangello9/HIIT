@@ -227,6 +227,8 @@ fetch('/workout').then((response) => {
         pauseButton.disabled = true;
     })
 
+
+    // newline
     
 
 
