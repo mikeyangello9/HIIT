@@ -30,7 +30,7 @@
     margin: 0 auto;
     border-radius: 1rem;
     left: 50%;
-    top: 50%;
+    top: 70%;
     transform: translate(-50%, -50%);
     
     
@@ -40,8 +40,7 @@
 
 .info{
     position: absolute;
-    display: flex;
-    justify-content: space-around;
+    display: block;
     gap: 1rem;
     top: 15%;
     left: 50%;
@@ -67,11 +66,6 @@
     border: 1px solid black;
 }
 
-.next-image{
-    width: 200px;
-    border: 1px solid black;
-    border-radius: 10px;
-}
 
 .workout-instance > .elem{
     margin-top: 2rem;
@@ -181,8 +175,7 @@
 }
 
 .workout-info{
-    display: flex;
-    justify-content: space-between;
+    display: block;
     list-style: none;
     padding: 2rem;
     gap: 2rem;
@@ -213,13 +206,41 @@
 
 .inform-user{
     position: absolute;
-    top: 90%;
+    top: 30%;
     left: 50%;
-    transform: translate(-50%, -90%);
+    transform: translate(-50%, -30%);
     font-weight: bolder;
     font-size: 1rem;
     display: none;
     background: #adff2f;
     border-radius: 10px;
     padding: 2rem;
+}
+
+@media(max-width:844px){
+    .info{
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        gap: 1rem;
+        
+    }
+
+    .next-workout{
+        position: absolute;
+        top: 200px;
+        left: 5%;
+    }
+
+    .workout-instance{
+        left: 75%;
+        top: 75%;
+        transform: translate(-75%, -75%);
+    
+    }
+    .inform-user{
+        position: absolute;
+        top: 50px;
+        left: 20%;
+    }
 }

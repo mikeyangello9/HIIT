@@ -28,11 +28,10 @@ countdownfunc(values, countDown)
 let instance= document.querySelector(".workout-instance");
 let nextWorkout = document.querySelector(".next-workout");
 
-let nextWorkoutImage = document.querySelector(".next-image");
+
 instance.style.display = "none";
 nextWorkout.style.display = "none";
 
-nextWorkoutImage.style.display = "none";
 setTimeout(() => {
 
 instance.style.display = "block";
@@ -174,6 +173,7 @@ fetch('/workout').then((response) => {
                 pauseButton.disabled = true;
                 resumeButton.disabled = true;
                 instance.remove();
+                nextWorkout.remove();
 
                 
                 usedTime.textContent = `${totalDuration}s was spent!`;
@@ -190,16 +190,11 @@ fetch('/workout').then((response) => {
         
         nextWorkout.style.display ="block";
         // nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}`;
-        nextWorkoutImage.style.display = "block";
-        // nextWorkoutImage.src = imageArray[currentWorkoutIndex + 1];
-
         if(currentWorkoutIndex + 1 < restArray.length){
             nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}, workout(s) -- ${currentWorkoutIndex + 1} / ${restArray.length}`;
-            nextWorkoutImage.src = imageArray[currentWorkoutIndex + 1];
         }
         else{
-            nextWorkout.textContent =`workouts exhausted`;
-            nextWorkoutImage.src = "";
+            nextWorkout.textContent =`Last workout, You've Got this`;
         }
 
         // inform user of change
@@ -220,6 +215,7 @@ fetch('/workout').then((response) => {
 
         if(remainingTime == 0){
             informUser.style.display = "none";
+            console.log("at an end")
 
         }
 
