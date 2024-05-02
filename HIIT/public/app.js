@@ -25,33 +25,20 @@ else{
 
 
 // calender
-const dyn = new Date();
+const dateNow = new Date();
 const calender = document.querySelector(".calender");
 
-const calenderDate =  new Date(dyn.getYear(), dyn.getMonth() + 1, 0);
-const allDaysInMonth = calenderDate.getDate();
-// console.log(calenderDate.getMonth());
+const daysOfWeek = [
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+  ];
 
-for(let i = 0; i < 7; i++){
-  const visual = document.createElement("div");
-  
-  visual.textContent = i + 1;
-  visual.style.color = 'white';
-  visual.style.display = 'inline';
-  visual.style.padding = '12px';
-  visual.style.margin = '4px';
-  visual.style.background = 'black';
-  visual.style.borderRadius = '10px';
-  visual.style.borderRadius = '10px';
-  visual.style.textAlign = 'center';
+const dayOfWeek = daysOfWeek[dateNow.getDay()];
 
-//   console.log(i)
+const time = dateNow.toLocaleTimeString("en-US", {hour: "numeric", minute: "numeric"});
 
-  if(i + 1 == today.getDate()){
-    visual.style.border = "2px solid white"
-  }
-  calender.appendChild(visual);
-}
+console.log(`${dayOfWeek} ${time}`);
+
+
 
 // dashboard
 const totalDuration = document.querySelector(".total-duration");
@@ -201,7 +188,7 @@ const selectWorkouts = (index) => {
             gif:element.querySelector(".gifs").src,
             rest:element.querySelector(".rest-time").textContent,
             type:"premade",
-            image: element.querySelector(".workout-image").src,
+            description: element.querySelector(".description").textContent
         }
 
         dataExtract.push(workoutServerData);
@@ -256,7 +243,7 @@ const selectWorkouts = (index) => {
         
 
         detail.style.display = "none"
-        desc.textContent = `Workout-name:${name.textContent} Duration: ${time.textContent}`
+        desc.textContent = `Activity:${name.textContent} Duration: ${time.textContent}s`
         description.style.display = "none"
         if (image) {
             image.style.width = "100px";
@@ -318,12 +305,11 @@ const removeWorkouts = event => {
             gif:element.querySelector(".gifs").src,
             rest:element.querySelector(".rest-time").textContent,
             type: "premade",
-            image: element.querySelector(".workout-image").src,
+            description: element.querySelector(".description").textContent
         }
         dataRemoved.push(updatedWorkoutServerData);
         console.log(dataRemoved);
         serve(dataRemoved);
-       
     });
 
     if(updatedArray.length === 0){

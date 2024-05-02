@@ -27,10 +27,12 @@ countdownfunc(values, countDown)
 
 let instance= document.querySelector(".workout-instance");
 let nextWorkout = document.querySelector(".next-workout");
+let workoutsLeft = document.querySelector(".workouts-left");
 
 
 instance.style.display = "none";
 nextWorkout.style.display = "none";
+workoutsLeft.style.display = "none";
 
 setTimeout(() => {
 
@@ -57,6 +59,7 @@ let workoutTrack;
 let gifTrack;
 
 let workoutEnd = document.querySelector(".workout-end");
+let congratulatoryHeader = document.querySelector(".big-header");
 let usedTime = document.querySelector(".used-time");
 let workoutCount = document.querySelector(".workout-count");
 
@@ -143,6 +146,7 @@ fetch('/workout').then((response) => {
             console.log("check");
             pauseButton.style.display = "none";
             resumeButton.style.display = "none";
+            workoutsLeft.style.display = "none";
         }
         else if(currentWorkoutIndex % 2 === 0){
                 workoutTrack = restArray[currentWorkoutIndex];
@@ -174,11 +178,14 @@ fetch('/workout').then((response) => {
                 resumeButton.disabled = true;
                 instance.remove();
                 nextWorkout.remove();
+                workoutsLeft.remove();
 
                 
                 usedTime.textContent = `${totalDuration}s was spent!`;
                 workoutCount.textContent = `${data.workout.length} workout(s) were completed!`;
-                workoutEnd.style.display = "block";
+                congratulatoryHeader.style.display = "block";
+                workoutEnd.style.display = "flex";
+                workoutEnd.style.justifyContent = "space-around";
 
             }
 
@@ -189,21 +196,23 @@ fetch('/workout').then((response) => {
         workoutName.textContent = workoutTrack  
         
         nextWorkout.style.display ="block";
-        // nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}`;
+        workoutsLeft.style.display = "block"
         if(currentWorkoutIndex + 1 < restArray.length){
-            nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}, workout(s) -- ${currentWorkoutIndex + 1} / ${restArray.length}`;
+            nextWorkout.textContent =`UPNEXT: ${restArray[currentWorkoutIndex + 1]}`;
+            workoutsLeft.textContent = `${currentWorkoutIndex + 1} / ${restIncluded.length}`
+            workoutsLeft.style.textAlign = "center";
         }
         else{
             nextWorkout.textContent =`Last workout, You've Got this`;
+            informUser.textContent = `Getting to the finish line in ${remainingTime}`;
         }
 
         // inform user of change
 
-        if(remainingTime <= 5){
-            console.log("get ready to change");   
+        if(remainingTime <= 5){  
             instance.style.border = "5px dotted #adff2f";
-            informUser.style.display = "block"
-            informUser.textContent= `GET READY TO CHANGE...`
+            informUser.style.display = "block";
+            informUser.textContent= `GET READY TO CHANGE IN ${remainingTime}`;
 
             
         }
@@ -215,7 +224,6 @@ fetch('/workout').then((response) => {
 
         if(remainingTime == 0){
             informUser.style.display = "none";
-            console.log("at an end")
 
         }
 
@@ -229,7 +237,7 @@ fetch('/workout').then((response) => {
     const startNextWorkout = () => {
         startTime = new Date().getTime();
         elapsedtime = 0;
-        intervalID = setInterval(updateTimer, 1000)
+        intervalID = setInterval(updateTimer, 1000);
     }
 
     startNextWorkout();

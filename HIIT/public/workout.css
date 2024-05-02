@@ -48,12 +48,27 @@
     
 }
 
+.workouts-left{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-weight: bolder;
+    margin-top: .5rem;
+
+    background: rgba(161, 255, 11, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(87, 248, 24, 0.1);
+    backdrop-filter: blur(4.2px);
+    -webkit-backdrop-filter: blur(4.2px);
+    border: 1px solid rgba(11, 255, 72, 0.54);
+}
+
 .next-workout{
     padding: 10px;
     border: 1px solid black;
     border-radius: 10px;
     font-weight: bolder;
-
+    margin-top: .5rem;
     background: rgba(161, 255, 11, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(87, 248, 24, 0.1);
@@ -169,9 +184,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgb(146, 146, 146);
+    background: rgb(0, 0, 0);
     padding: .5rem;
     border-radius: 10px;
+}
+
+.big-header{
+    display: none;
+    font-size: 2rem;
+    text-align: center;
+    color: black;
 }
 
 .workout-info{
@@ -182,21 +204,20 @@
     
 }
 .heading{
-    display: flex;
-    justify-content: space-between;
+    padding: .5rem;
+    display: block; 
     list-style: none;
-    color: greenyellow;
+    color: rgb(255, 255, 255);
 }
 
 .workout-info > li{
     padding: .5rem;
-    background: black;
-    color: yellowgreen;
-    border-radius: 10px;
-    font-weight: bolder;
+    display: block; 
+    list-style: none;
+    color: rgb(255, 255, 255);
 }
 .heading > li{
-    padding: 1rem;
+    padding: 2rem;
 }
 
 
@@ -217,7 +238,7 @@
     padding: 2rem;
 }
 
-@media(max-width:844px){
+@media(max-width:844px) and (min-width:844px){
     .info{
         position: relative;
         display: flex;
@@ -227,6 +248,12 @@
     }
 
     .next-workout{
+        position: absolute;
+        top: 300px;
+        left: 5%;
+    }
+    
+    .workouts-left{
         position: absolute;
         top: 200px;
         left: 5%;

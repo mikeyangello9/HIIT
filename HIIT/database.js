@@ -1,12 +1,11 @@
 // import { sqlite3 } from 'sqlite3';
-
 const sqlite = require('sqlite3').verbose();
 let user;
 let workout;
 let history;
 
 //connect to db
-const db = new sqlite.Database('./workout.db', sqlite.OPEN_READWRITE,(err) => {
+const db = new sqlite.Database('./workouts.db', sqlite.OPEN_READWRITE,(err) => {
     if(err) {
         console.error(err.message);
     } 
@@ -15,24 +14,53 @@ const db = new sqlite.Database('./workout.db', sqlite.OPEN_READWRITE,(err) => {
 
 // create user table
 
+const createUserTable = () => {
+    user = `
+    CREATE TABLE users(
+        ID INTEGER PRIMARY KEY,
+        user_name TEXT
+    )`;
+
+    db.run(user);
+}
+
 const createWorkoutTable = () => {
     workout = `
-        CREATE TABLE IF NOT EXIST workouts(
+        CREATE TABLE IF NOT EXISTS workouts(
             id INTEGER PRIMARY KEY,
+            user_id INTEGER,
             workout_name TEXT,
             duration TEXT,
-          
-            
-        )
-    `
+            descriptions TEXT,
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )`;
+        db.run(workout);
+}
+
+const createHistoryTable = () => {
+    history = `
+        CREATE TABLE IF NOT EXISTS history(
+            id INTEGER PRIMARY KEY,
+            user_id INTEGER,
+            workout_id INTEGER,
+            date TEXT,
+            FOREIGN KEY (user_id) REFERENCES users(id),
+            FOREIGN KEY (workout_id) REFERENCES workouts(id)
+        )`
+        db.run(history);
 }
 
 
 
 
-
 // drop the db
-db.run('DROP TABLE users');
+// db.run('DROP TABLE users');
+
+// createUserTable();
+// createWorkoutTable();
+createHistoryTable();
+// db.run(workout);
+// db.run(history);
 
 // insert data into tables
 
