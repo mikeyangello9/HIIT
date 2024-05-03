@@ -4,28 +4,28 @@ let user;
 let workout;
 let history;
 
-//connect to db
-const db = new sqlite.Database('./workouts.db', sqlite.OPEN_READWRITE,(err) => {
-    if(err) {
-        console.error(err.message);
-    } 
-    console.log("Connected to HIIT database!")
+// connect to db
+const db = new sqlite.Database('./workouts.db', sqlite.OPEN_READWRITE, (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Connected to HIIT database!');
 });
 
 // create user table
 
 const createUserTable = () => {
-    user = `
+  user = `
     CREATE TABLE users(
         ID INTEGER PRIMARY KEY,
         user_name TEXT
     )`;
 
-    db.run(user);
-}
+  db.run(user);
+};
 
 const createWorkoutTable = () => {
-    workout = `
+  workout = `
         CREATE TABLE IF NOT EXISTS workouts(
             id INTEGER PRIMARY KEY,
             user_id INTEGER,
@@ -34,11 +34,11 @@ const createWorkoutTable = () => {
             descriptions TEXT,
             FOREIGN KEY (user_id) REFERENCES users(id)
         )`;
-        db.run(workout);
-}
+  db.run(workout);
+};
 
 const createHistoryTable = () => {
-    history = `
+  history = `
         CREATE TABLE IF NOT EXISTS history(
             id INTEGER PRIMARY KEY,
             user_id INTEGER,
@@ -46,11 +46,27 @@ const createHistoryTable = () => {
             date TEXT,
             FOREIGN KEY (user_id) REFERENCES users(id),
             FOREIGN KEY (workout_id) REFERENCES workouts(id)
-        )`
-        db.run(history);
-}
+        )`;
+  db.run(history);
+};
 
 
+const queryWorkouts = () => {
+  const sql = 'SELECT * FROM workouts';
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log('Error querying workouts table:', err);
+      return;
+    }
+
+    // Log the retrieved rows
+    console.log('Workouts:');
+    rows.forEach(row => {
+      console.log(row);
+    });
+  });
+};
 
 
 // drop the db
@@ -59,6 +75,7 @@ const createHistoryTable = () => {
 // createUserTable();
 // createWorkoutTable();
 createHistoryTable();
+queryWorkouts();
 // db.run(workout);
 // db.run(history);
 
