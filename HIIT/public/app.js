@@ -3,6 +3,9 @@ const greetUser = document.querySelector('.greet-user');
 const today = new Date();
 
 
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+
 date.textContent = `${today.getDate()} - 0${today.getMonth() + 1} - ${today.getFullYear()}`;
 
 // greet user
@@ -10,13 +13,13 @@ const hours = today.getHours();
 // console.log(hours)
 
 if (hours >= 0 && hours <= 11) {
-  greetUser.textContent = 'Good morning user';
+  greetUser.textContent = `Good morning ${username}`;
 } else if (hours > 11 && hours < 18) {
-  greetUser.textContent = 'Good Afternoon user';
+  greetUser.textContent = `Good Afternoon ${username}`;
 } else if (hours >= 18 && hours <= 21) {
-  greetUser.textContent = 'Good Evening user';
+  greetUser.textContent = `Good Evening ${username}`;
 } else {
-  greetUser.textContent = 'Good Night user';
+  greetUser.textContent = `Good Night ${username}`;
 }
 
 // calender
@@ -42,6 +45,10 @@ const start = document.querySelector('.start');
 const que = document.querySelector('.que');
 que.style.display = '#adff2f';
 
+
+start.addEventListener('click', () => {
+  window.location.href = './workout.html?username=' + encodeURIComponent(username);
+});
 
 // custom hub
 
@@ -130,7 +137,7 @@ const serve = (userSelection) => {
   };
 
 
-  fetch('/', options)
+  fetch('/workoutData', options)
     .then((response) => {
       if (!response.ok) {
         throw new Error('response was not ok!');

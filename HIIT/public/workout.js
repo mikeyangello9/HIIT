@@ -3,6 +3,10 @@ const countDown = document.querySelector('.countdown-display');
 const values = ['3', '2', '1', 'GO'];
 let index = 0;
 
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+
+console.log(username);
 
 const countdownfunc = (countdownItems, element) => {
   const countdownInterval = setInterval(() => {

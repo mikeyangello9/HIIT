@@ -51,17 +51,17 @@ const createHistoryTable = () => {
 };
 
 
-const queryWorkouts = () => {
-  const sql = 'SELECT * FROM workouts';
+const queryUsers = () => {
+  const sql = 'SELECT * FROM users';
 
   db.all(sql, [], (err, rows) => {
     if (err) {
-      console.log('Error querying workouts table:', err);
+      console.log('Error querying users table:', err);
       return;
     }
 
     // Log the retrieved rows
-    console.log('Workouts:');
+    console.log('Users:');
     rows.forEach(row => {
       console.log(row);
     });
@@ -74,8 +74,8 @@ const queryWorkouts = () => {
 
 // createUserTable();
 // createWorkoutTable();
-createHistoryTable();
-queryWorkouts();
+// createHistoryTable();
+queryUsers();
 // db.run(workout);
 // db.run(history);
 
