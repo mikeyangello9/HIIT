@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="workout.css">
+<link rel="stylesheet" href="stylesheets/workout.css">
 
 <body>
 
@@ -29,9 +29,6 @@
             <div class="gif">
                 <img class="gif-start" src="" alt="">
             </div>
-            <div class="name elem glass">
-                <p class="workout-name">workout name</p>
-            </div>
 
             <div class="time elem glass">
                 <p class="duration">00</p>
@@ -42,6 +39,11 @@
             </div>
 
             <div class="control">
+
+                <div class="name elem glass">
+                    <p class="workout-name">workout name</p>
+                </div>
+
                 <div class="pause elem">
                     <button class="pause-button">⏸️</button>
                 </div>
@@ -68,9 +70,11 @@
                         <li class="workout-count">number</li>
                         <li class="used-time"></li>
                 </ul>  
+
+                <div></div>
         </div>
         <div class="inform-user">NOTHING TO SEE HERE</div>
 </body>
 
-    <script src="./workout.js"></script>
+    <script src="./scripts/workout.js"></script>
 </html>

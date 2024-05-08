@@ -53,7 +53,6 @@ app.post('/addUser', (req, res) => {
 });
 
 app.get('/addUser', (req, res) => {
-  // send query of db
   sql = 'SELECT * FROM users';
   db.all(sql, [], (err, rows) => {
     if (err) {
@@ -63,7 +62,6 @@ app.get('/addUser', (req, res) => {
   });
 });
 
-//
 
 // sending data from client to server
 let workoutData;
@@ -102,4 +100,36 @@ app.post('/workoutData', (req, res) => {
 app.get('/workout', (req, res) => {
   // res.setHeader('Content-Type', 'text/html')
   res.send(workoutData);
+});
+
+
+// get data completed workout data from workout page and save to history table
+app.post('/completedWorkoutData', (req, res) => {
+  console.log(req.body.name);
+  const name = req.body.name;
+  const duration = req.body.duration;
+  const rest = req.body.rest;
+  const date = req.body.date;
+  const userID = req.body.userID;
+
+  sql = 'INSERT INTO history (workout_name, duration, rest, date, user_id) VALUES (?, ?, ?, ?, ?);';
+  db.run(sql, [name, duration, rest, date, userID], (err) => {
+    if (err) {
+      console.log('fails at insert', err);
+      return res.json({ status: 300, success: false, error: err });
+    } else {
+      console.log('insert successful');
+      return res.json({ status: 200, success: true });
+    }
+  });
+});
+
+app.get('/workoutHistory', (req, res) => {
+  sql = 'SELECT * FROM history';
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      return res.json({ status: 300, success: false, error: err });
+    }
+    return res.json({ status: 200, success: true, data: rows });
+  });
 });

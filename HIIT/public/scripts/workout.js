@@ -5,8 +5,9 @@ let index = 0;
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
+const userId = urlParams.get('id');
 
-console.log(username);
+console.log(`username:${username}, user id: ${userId} `);
 
 const countdownfunc = (countdownItems, element) => {
   const countdownInterval = setInterval(() => {
@@ -59,7 +60,7 @@ setTimeout(() => {
   const congratulatoryHeader = document.querySelector('.big-header');
   const usedTime = document.querySelector('.used-time');
   const workoutCount = document.querySelector('.workout-count');
-
+  const time = document.querySelector('.time');
   const totalArray = [];
 
   const restIncluded = [];
@@ -68,6 +69,10 @@ setTimeout(() => {
   const imageArray = [];
 
   const informUser = document.querySelector('.inform-user');
+  const durationHistory = [];
+  const workoutHistory = [];
+  const restHistory = [];
+  const typeHistory = [];
 
   // alert user that work is about to start
 
@@ -101,13 +106,17 @@ setTimeout(() => {
         gifArray.push('./gifs/resting.gif');
         imageArray.push('./images/restingimage.jpg');
       }
+      // history data
+      durationHistory.push(data.workout[i].duration);
+      workoutHistory.push(data.workout[i].name);
+      restHistory.push(data.workout[i].rest);
+      typeHistory.push(data.workout[i].type);
     }
     console.log(restIncluded);
     console.log(gifArray);
     console.log(restArray);
     console.log(imageArray);
     // show next workout
-
 
     // use one instance
 
@@ -163,6 +172,54 @@ setTimeout(() => {
           congratulatoryHeader.style.display = 'block';
           workoutEnd.style.display = 'flex';
           workoutEnd.style.justifyContent = 'space-around';
+
+          // after workout end send a post req to server and save the completed workout to the history table in the database
+
+          console.log(`history data${durationHistory}, ${workoutHistory}`);
+          let historyData;
+
+          const dateNow = new Date();
+          const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          const dayOfWeek = daysOfWeek[dateNow.getDay()];
+          const time = dateNow.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+          const dateOfWorkout = `${dayOfWeek} ${time}`;
+
+          const serve = (userSelection) => {
+            const options = {
+              method: 'POST',
+              body: JSON.stringify(userSelection),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            };
+
+
+            fetch('/completedWorkoutData', options)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error('response was not ok!');
+                }
+
+                if (response.status === 204) {
+                  throw new Error('response is empty');
+                }
+                return response.json();
+              }).then(data => {
+                console.log(`server response ${data}`);
+              }).catch(error => console.error(`something has gone awry: ${error}`));
+          };
+          for (let i = 0; i < workoutHistory.length; i++) {
+            historyData = {
+              userID: userId,
+              name: workoutHistory[i],
+              duration: `${durationHistory[i]}s`,
+              rest: `${restHistory[i]}s`,
+              date: dateOfWorkout,
+            };
+            serve(historyData);
+          }
+
+          // serve(parsedData);
         }
       }
 
@@ -174,7 +231,7 @@ setTimeout(() => {
       workoutsLeft.style.display = 'block';
       if (currentWorkoutIndex + 1 < restArray.length) {
         nextWorkout.textContent = `UPNEXT: ${restArray[currentWorkoutIndex + 1]}`;
-        workoutsLeft.textContent = `${currentWorkoutIndex + 1} / ${restIncluded.length}`;
+        workoutsLeft.textContent = `${currentWorkoutIndex + 1} / ${data.workout.length}`;
         workoutsLeft.style.textAlign = 'center';
       } else {
         nextWorkout.textContent = 'Last workout, You\'ve Got this';
@@ -184,11 +241,12 @@ setTimeout(() => {
       // inform user of change
 
       if (remainingTime <= 5) {
-        instance.style.border = '5px dotted #adff2f';
+        time.style.color = 'red';
         informUser.style.display = 'block';
         informUser.textContent = `GET READY TO CHANGE IN ${remainingTime}`;
       } else {
-        instance.style.border = '1px solid black';
+        time.style.color = 'black';
+        instance.style.border = 'none';
         informUser.style.display = 'none';
       }
 

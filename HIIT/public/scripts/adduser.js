@@ -44,8 +44,9 @@ async function checkUser() {
   for (let i = 0; i < json.data.length; i++) {
     if (userInput.value === json.data[i].user_name) {
       console.log('logged in');
+      console.log(json.data[i].ID);
       warning.style.display = 'none';
-      window.location.href = '/userarea.html?username=' + encodeURIComponent(userInput.value);
+      window.location.href = '/userarea.html?username=' + encodeURIComponent(userInput.value) + '&id=' + encodeURIComponent(json.data[i].ID);
       return; // Exit the loop after successful login
     } else {
       warning.style.display = 'block';

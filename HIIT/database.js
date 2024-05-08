@@ -39,20 +39,21 @@ const createWorkoutTable = () => {
 
 const createHistoryTable = () => {
   history = `
-        CREATE TABLE IF NOT EXISTS history(
+        CREATE TABLE history(
             id INTEGER PRIMARY KEY,
-            user_id INTEGER,
-            workout_id INTEGER,
+            workout_name TEXT,
+            duration TEXT,
+            rest TEXT,
             date TEXT,
-            FOREIGN KEY (user_id) REFERENCES users(id),
-            FOREIGN KEY (workout_id) REFERENCES workouts(id)
+            user_id INTEGER,
+            FOREIGN KEY (user_id) REFERENCES users(id)
         )`;
   db.run(history);
 };
 
 
 const queryUsers = () => {
-  const sql = 'SELECT * FROM users';
+  const sql = 'SELECT * FROM history';
 
   db.all(sql, [], (err, rows) => {
     if (err) {
@@ -70,7 +71,7 @@ const queryUsers = () => {
 
 
 // drop the db
-// db.run('DROP TABLE users');
+// db.run('DROP TABLE history');
 
 // createUserTable();
 // createWorkoutTable();

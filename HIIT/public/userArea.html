@@ -8,13 +8,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="stylesheets/style.css">
 
 <body>
     <div class="top-level">
         <div class="greetings">
                 <span class="greet-user">JULY</span>
                 <p class="day">TODAY'S DATE IS: <span class="date">10</p>
+                <a href="http://localhost:8080/"><button class="logout">logout</button></a>
             </div>
 
             
@@ -26,9 +27,11 @@
                             <option value="15">Medium</option>
                             <option value="10">Intense</option>
                         </select>
+
                         
                     </label>
-                    <li class="total-duration">Total Duration</li>
+                    
+                    <button class="show-history">Show workout History</button>
                 </ul>
                 <div class="calender"></div>
             </div>
@@ -307,6 +310,8 @@
             <button class="close-button">X</button>
         </div>
 
+        <div class="warning">WARNING</div>
+
         <div class="custom-workout">
             <label for="">workout:</label>
             <input type="text" id="workout" required>
@@ -331,19 +336,8 @@
         
     </div>
 
-
-
-    
-    
-   
-
-    
-
-    
-    
-
 </body>
 
 
-<script src="./app.js"></script>
+<script src="./scripts/app.js"></script>
 </html> 

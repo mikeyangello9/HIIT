@@ -5,6 +5,8 @@ const today = new Date();
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
+const userId = urlParams.get('id');
+
 
 date.textContent = `${today.getDate()} - 0${today.getMonth() + 1} - ${today.getFullYear()}`;
 
@@ -24,14 +26,9 @@ if (hours >= 0 && hours <= 11) {
 
 // calender
 const dateNow = new Date();
-
-const daysOfWeek = [
-  'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const dayOfWeek = daysOfWeek[dateNow.getDay()];
-
 const time = dateNow.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
-
 console.log(`${dayOfWeek} ${time}`);
 
 // dashboard
@@ -47,8 +44,9 @@ que.style.display = '#adff2f';
 
 
 start.addEventListener('click', () => {
-  window.location.href = './workout.html?username=' + encodeURIComponent(username);
+  window.location.href = './workout.html?username=' + encodeURIComponent(username) + '&id=' + encodeURIComponent(user_id);
 });
+
 
 // custom hub
 
@@ -68,7 +66,7 @@ const addCustomWorkout = document.querySelector('.add-button');
 const intensityList = document.getElementById('intensity-list');
 // const changeDuration = document.querySelectorAll('.time');
 const changeRest = document.querySelectorAll('.rest-time');
-
+const showHistory = document.querySelector('.show-history');
 // select intensity of workout
 intensityList.addEventListener('change', () => {
   const difficultyList = intensityList.selectedOptions;
@@ -349,6 +347,10 @@ const logInput = () => {
   console.log(lastCustomElem);
 
   //
+  if (customDuration.value === '') {
+    console.log('enter a duration');
+    addCustomWorkout.disabled = true;
+  }
 
   customDesc.textContent = `Workout-name:${customWorkout.value}, Duration:${customDuration.value}`;
   customName.textContent = customWorkout.value;
@@ -452,4 +454,33 @@ const logInput = () => {
 
   removeCustomWorkouts.addEventListener('click', removeCustomWorkoutsfunc);
 };
-addCustomWorkout.addEventListener('click', logInput);
+
+const warning = document.querySelector('.warning');
+
+addCustomWorkout.addEventListener('click', () => {
+  // validate inputs
+  if (customDuration.value === '' || customRest.value === '' || customWorkout.value === '') {
+    warning.style.display = 'block';
+    warning.textContent = 'Enter rest or duration or workout value';
+  } else if (parseInt(customDuration.value) > 59 || parseInt(customRest.value) > 59) {
+    warning.style.display = 'block';
+    warning.textContent = 'Enter a valid duration or rest (0 - 59s)';
+    console.log('check');
+  } else {
+    warning.style.display = 'none';
+    logInput();
+  }
+});
+
+
+async function getHistory() {
+  const response = await fetch('/workoutHistory');
+  const json = await response.json();
+  console.log(json.data);
+  for (let i = 0; i < json.data.length; i++) {
+    if (json.data[i].user_id === parseInt(userId)) {
+      console.log(json.data[i].user_id);
+    }
+  }
+}
+getHistory();

@@ -6,8 +6,6 @@
 }
 body{
     background: rgb(255, 255, 255);
-    
-    
 }
 
 .top-level{
@@ -15,15 +13,13 @@ body{
 }
 
 .greetings{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    display: block;
     padding: 1rem;
     line-height: 4rem;
     background-color: rgb(0, 0, 0);
     margin: 5px;
     border-radius:5px ;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 @media (max-width: 390px) {
@@ -33,24 +29,26 @@ body{
 }
 
 
+.day{
+    color: white;
+}
+
 .date{
     background: #adff2f;
-    padding: 4px;
+    padding: 6px;
     border-radius: 5px;
-    color: rgb(0, 0, 0);
-    
-
+    color: black;
 }
 .greet-user{
     font-weight: bold;
     background-color: #adff2f;
     color: black;
-    padding: 1px;
+    padding: 6px;
     border-radius: 5px;
+    font-size: 2rem;
 }
 
 .workout-data{
-    /* background: rgb(0, 0, 0); */
     display: flex;
     justify-content: space-around;
     list-style: none;
@@ -58,6 +56,7 @@ body{
     margin:5px;
     border-radius: 5px;
     font-size: 10px;
+    gap: 1rem;
 }
 
 .workout-data > li{
@@ -241,8 +240,7 @@ body{
 }
 
 .description{
-    text-align: center;
-    opacity: 0.5;
+    text-align: left;
     padding: 10px;
     color: white;
     font-size: 12px;
@@ -332,12 +330,13 @@ body{
     height: 2.5rem;
     width: 2.5rem;
     border: none;
-    
-    
-    
-    
 }
 
+.warning{
+    display: none;
+    font-weight: bolder;
+    color: red;
+}
 
 .gifs{
     display: none;
@@ -368,13 +367,7 @@ body{
     padding: 2rem;
     border-radius: 12px;
     color: rgb(255, 255, 255);
-    transform: translate(-50% -50%);
-    background: rgba(113, 221, 13, 0.5);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(87, 248, 24, 0.1);
-    backdrop-filter: blur(1.5px);
-    -webkit-backdrop-filter: blur(1.5px);
-    border: 1px solid rgba(255, 255, 255, 0.54);
+    background: rgb(102, 102, 102);
 }
 
 .close{
@@ -383,7 +376,6 @@ body{
 }
 
 .close > p{
-    background: white;
     border-radius: 10px;
 }
 
@@ -409,4 +401,12 @@ body{
 #duration, #workout, #description, #rest{
     border-radius: 12px;
     border: none;
+}
+
+.logout{
+    padding: 8px;
+    background: none;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
 }
