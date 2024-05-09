@@ -44,7 +44,7 @@ que.style.display = '#adff2f';
 
 
 start.addEventListener('click', () => {
-  window.location.href = './workout.html?username=' + encodeURIComponent(username) + '&id=' + encodeURIComponent(user_id);
+  window.location.href = './workout.html?username=' + encodeURIComponent(username) + '&id=' + encodeURIComponent(userId);
 });
 
 
@@ -480,6 +480,10 @@ async function getHistory() {
   for (let i = 0; i < json.data.length; i++) {
     if (json.data[i].user_id === parseInt(userId)) {
       console.log(json.data[i].user_id);
+      console.log(json.data[i].rest);
+      console.log(json.data[i].workout_name);
+    } else {
+      console.log('You have not completed any exercises');
     }
   }
 }

@@ -1,10 +1,12 @@
 {
   "name": "hiitapp",
   "version": "1.0.0",
+  "type": "module",
   "description": "the application allows users to select workouts and carry them out at a set interval",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "setup" : "node database.js"
   },
   "keywords": [
     "exercise",

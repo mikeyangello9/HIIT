@@ -1,13 +1,34 @@
-#HIIT Workout App
-Overview
-This HIIT (High-Intensity Interval Training) Workout App allows users to select and carry out customizable workout routines. With a user-friendly interface, it provides a seamless experience for users to engage in efficient and effective workouts.
+# HIIT up2132797 
+## Key features
+REMOVE ME: Introduce the key features, paying special attention to the non-code ones.  Tell us briefly how to find & use them, and describes the reasons behind the design decisions you made in their implementation.  
 
-Features
-Workout Selection: Users can choose from a variety of pre-designed HIIT workout routines or create their own custom routines.
+### Build a custom HIIT workout from scratch / select premade activities and create custom ones
+Users can choose from various pre-designed HIIT exercises/activities to build a workout or create different custom exercises/activities to develop a workout. in essence, they can both be made from scratch to suit the user's needs.
 
-Install dependencies using npm:
-Copy code
-npm install
-or
-Run the app locally:
-npm start
+### Create multiple activities / users can create multiple activities using premade workouts and the custom hub.
+upon logging into the app users are greeted with pre-made exercises which consists of an exercise name, duration, description allocated rest-time (can be changed discussed in advanced features). multiple instances of each exercises can be added to thye user's workout list of exercises, users can also create a custom workout which again can be replicated multiple times except this time they get to name the workout and specify the rest time and duration of the workout. this can be utilised by clicking on the '+' add button next to the start button, this will bring up the custom hub  where the user can they input the values into the form which is logically validated.
+
+### Start, stop and pause workouts. / the user can see & control what they do as well as being informed about change.
+When the user clicks on the start button which will only by conspicuous when a selection or customisation is added to the list of selected activities, they are served a page with all their selected activities waiting for them, they are greeted with a countdown consisting of legible fonts which alerts them of the start of their workout after which the first workout in the sequence is started with a timer, a gif to show them what they should be doing and a hub which consists of a pause and play button
+
+
+## AI
+REMOVE ME: Detail your use of AI, listing of the prompts you used, and whether the results formed or inspired part of your final submission and where we can see this (and if not, why not?). You may wish to group prompts into headings/sections - use markdown in any way that it helps you communicate your use of AI. 
+
+### Prompts to develop XYZ (exmaple)
+A sequence of prompts helped me develop this feature:
+
+>  this is an example prompt given to a chatbot
+The response was proved useless because the prompt wasn't specific enough about XYZ, so:
+
+>  this is an example prompt given to a chatbot detailing XYZ
+The response was better so I could speifically ask about QRST
+
+>  how can I integrate QRST here?
+The suggestion worked with minor modification.
+
+### Prompts to develop GHIJ (exmaple)
+For the GHIJ feature I ...
+
+>  this is an example prompt given to a chatbot
+words words words etc.

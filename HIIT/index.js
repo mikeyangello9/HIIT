@@ -1,11 +1,17 @@
-const express = require('express');
+import express from 'express';
+import sqlite3 from 'sqlite3';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
-const path = require('path');
 let sql;
 
-const sqlite = require('sqlite3').verbose();
+const sqlite = sqlite3.verbose();
 
-const db = new sqlite.Database('./workouts.db', sqlite.OPEN_READWRITE, (err) => {
+const db = new sqlite.Database('workout.db', sqlite.OPEN_READWRITE, (err) => {
   if (err) {
     console.error(err.message);
   }
@@ -23,9 +29,9 @@ app.use(express.json({ imit: '100mb' }));
 
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'adduser.html'));
+  const filePath = path.resolve(__dirname, 'public', 'adduser.html');
+  res.sendFile(filePath);
 });
-
 
 app.post('/addUser', (req, res) => {
   const name = req.body.name;
