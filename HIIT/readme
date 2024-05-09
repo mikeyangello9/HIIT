@@ -1,15 +1,42 @@
 # HIIT up2132797 
 ## Key features
-REMOVE ME: Introduce the key features, paying special attention to the non-code ones.  Tell us briefly how to find & use them, and describes the reasons behind the design decisions you made in their implementation.  
 
-### Build a custom HIIT workout from scratch / select premade activities and create custom ones
+### Core features: Build a custom HIIT workout from scratch / select premade activities and create custom ones
 Users can choose from various pre-designed HIIT exercises/activities to build a workout or create different custom exercises/activities to develop a workout. in essence, they can both be made from scratch to suit the user's needs.
 
-### Create multiple activities / users can create multiple activities using premade workouts and the custom hub.
+### Core features: Create multiple activities / users can create multiple activities using premade workouts and the custom hub.
 upon logging into the app users are greeted with pre-made exercises which consists of an exercise name, duration, description allocated rest-time (can be changed discussed in advanced features). multiple instances of each exercises can be added to thye user's workout list of exercises, users can also create a custom workout which again can be replicated multiple times except this time they get to name the workout and specify the rest time and duration of the workout. this can be utilised by clicking on the '+' add button next to the start button, this will bring up the custom hub  where the user can they input the values into the form which is logically validated.
 
-### Start, stop and pause workouts. / the user can see & control what they do as well as being informed about change.
-When the user clicks on the start button which will only by conspicuous when a selection or customisation is added to the list of selected activities, they are served a page with all their selected activities waiting for them, they are greeted with a countdown consisting of legible fonts which alerts them of the start of their workout after which the first workout in the sequence is started with a timer, a gif to show them what they should be doing and a hub which consists of a pause and play button
+### Core features: Start, stop and pause workouts. / the user can see & control what they do as well as being informed about change.
+When the user clicks on the start button which will only by conspicuous when a selection or customisation is added to the list of selected activities, they are served a page with all their selected activities waiting for them, they are greeted with a countdown consisting of legible fonts which alerts them of the start of their workout after which the first workout in the sequence is started with a timer, a gif to show them what they should be doing and a hub which consists of a pause and play button to pause and resume workouts respectively. when an activity is completed they are automatically assigned rest time between each workout and they are informed visually when to change workouts and also what the next workout will be.
+
+### advanced features: Visual cues
+During a workout session the user has an abundance of visual ques, examples include
+ - Number of exercise to be displayed
+ - the next exercise to be done
+ - an appropiate gif to show what they should be doing
+ - a timer that changes color (red) in the last 5 seconds of each exercise, informing the user of a change in exercise.
+ - a display counting down the change of the exercise also displayed in the last 5 seconds of each exercise, this is legible to catch the attention of the user if they were slightly distracted.
+## Why I have visual cues 
+I have implemented this feature to compensate for my lack of audio cues as well as keeping the user informed as regards what they need to be doing, when they need to do it and how they should be doing it?
+
+### advanced features: Adjustable difficulty level
+right before selecting a premade workout, the user can find a difficulty dropbox at the top of the page, selecting values affect the rest time between each activity, e.g.
+- light gives the user 20 seconds to rest
+- medium gives the user 15 seconds to rest
+- intense gives the user 10 seconds to rest
+
+## Why I have: adjustable difficulty level
+I have implemented this feature to carter for individuals with varying fitness levels.
+
+### advanced features: Record keeping (history of completed workouts)
+after the user has completed a series of exercise they can view a history of the workouts that they have completed be it premade exercises or custom exercises.
+
+## Why I have: record keeping 
+
+I have implemented this feature for the user to track their progress and also incentivise them to interact with the app and do some exercise.
+
+
 
 
 ## AI
