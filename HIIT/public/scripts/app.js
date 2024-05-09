@@ -62,11 +62,13 @@ const customRest = document.querySelector('#rest');
 const addCustomWorkout = document.querySelector('.add-button');
 
 
-// const intensitySelector = document.querySelector('.workout-intensity');
 const intensityList = document.getElementById('intensity-list');
-// const changeDuration = document.querySelectorAll('.time');
+
 const changeRest = document.querySelectorAll('.rest-time');
 const showHistory = document.querySelector('.show-history');
+const closeHistory = document.querySelector('.close-history');
+const historyPage = document.querySelector('.display-history');
+
 // select intensity of workout
 intensityList.addEventListener('change', () => {
   const difficultyList = intensityList.selectedOptions;
@@ -472,19 +474,33 @@ addCustomWorkout.addEventListener('click', () => {
   }
 });
 
-
+let workoutHistoryDiv;
 async function getHistory() {
   const response = await fetch('/workoutHistory');
   const json = await response.json();
   console.log(json.data);
   for (let i = 0; i < json.data.length; i++) {
     if (json.data[i].user_id === parseInt(userId)) {
-      console.log(json.data[i].user_id);
-      console.log(json.data[i].rest);
-      console.log(json.data[i].workout_name);
+      workoutHistoryDiv = document.createElement('div');
+      workoutHistoryDiv.textContent = `${json.data[i].id} Workout Name:${json.data[i].workout_name}, Rest: ${json.data[i].rest}, Date:  ${json.data[i].date} `;
+      historyPage.appendChild(workoutHistoryDiv);
     } else {
       console.log('You have not completed any exercises');
+      workoutHistoryDiv.textContent = 'You have not completed any exercises';
     }
   }
 }
+
+document.querySelector('.history-head').textContent = `${username}'s Exercise History`;
 getHistory();
+const showHistoryPage = () => {
+  historyPage.style.display = 'block';
+};
+
+const closeHistoryPage = () => {
+  historyPage.style.display = 'none';
+};
+
+
+showHistory.addEventListener('click', showHistoryPage);
+closeHistory.addEventListener('click', closeHistoryPage);

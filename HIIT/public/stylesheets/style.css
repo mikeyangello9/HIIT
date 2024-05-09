@@ -410,3 +410,22 @@ body{
     border: 1px solid white;
     border-radius: 10px;
 }
+
+.display-history {
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 100%;
+    height: 80%;
+    transform: translate(-10%, -10%);
+    background: rgb(255, 255, 255);
+    z-index: 9999;
+    border: 1px solid black;
+}
+
+.close-history {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
