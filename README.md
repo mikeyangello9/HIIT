@@ -1,0 +1,135 @@
+# HIIT up2132797 
+
+
+### INSTALLATION GUIDE 
+run the following in the same order;
+- npm install 
+- npm run setup
+- npm start
+
+### please add a user as the database is created automatically hence is empty
+
+# Key features
+
+### Core features: Build a custom HIIT workout from scratch / select premade activities and create custom ones
+Users can choose from various pre-designed HIIT exercises/activities to build a workout or create different custom exercises/activities to develop a workout. in essence, they can both be made from scratch to suit the user's needs.
+
+### Core features: Create multiple activities / users can create multiple activities using premade workouts and the custom hub.
+upon logging into the app users are greeted with pre-made exercises which consists of an exercise name, duration, description allocated rest-time (can be changed discussed in advanced features). multiple instances of each exercises can be added to thye user's workout list of exercises, users can also create a custom workout which again can be replicated multiple times except this time they get to name the workout and specify the rest time and duration of the workout. this can be utilised by clicking on the '+' add button next to the start button, this will bring up the custom hub  where the user can they input the values into the form which is logically validated.
+
+## where to find this feature event:
+all premade exercise have a select button that adds them to the list
+the '+' button next to the start button brings up the custom hub, clicking add within the hub adds a custom exercise to the list.
+
+
+### Core features: Start, stop and pause workouts. / the user can see & control what they do as well as being informed about change.
+When the user clicks on the start button which will only by conspicuous when a selection or customisation is added to the list of selected activities, they are served a page with all their selected activities waiting for them, they are greeted with a countdown consisting of legible fonts which alerts them of the start of their workout after which the first workout in the sequence is started with a timer, a gif to show them what they should be doing and a hub which consists of a pause and play button to pause and resume workouts respectively. when an activity is completed they are automatically assigned rest time between each workout and they are informed visually when to change workouts and also what the next workout will be.
+
+## where to find this feature event:
+when the  user clicks on the 'start workout(s)' button they are served their workouts page, they need not do anything other than pausing and playing the workouts
+
+### advanced features: Visual cues
+During a workout session the user has an abundance of visual ques, examples include
+ - Number of exercise to be displayed
+ - the next exercise to be done
+ - an appropiate gif to show what they should be doing
+ - a timer that changes color (red) in the last 5 seconds of each exercise, informing the user of a change in exercise.
+ - a display counting down the change of the exercise also displayed in the last 5 seconds of each exercise, this is legible to catch the attention of the user if they were slightly distracted.
+## Why I have visual cues 
+I have implemented this feature to compensate for my lack of audio cues as well as keeping the user informed as regards what they need to be doing, when they need to do it and how they should be doing it?
+
+## where to find this feature event:
+all visual cues do not need to be interacted with as they are there to visually guide the user.
+
+### advanced features: Adjustable difficulty level
+right before selecting a premade workout, the user can find a difficulty dropbox at the top of the page, selecting values affect the rest time between each activity, e.g.
+- light gives the user 20 seconds to rest
+- medium gives the user 15 seconds to rest
+- intense gives the user 10 seconds to rest
+
+## Why I have: adjustable difficulty level
+I have implemented this feature to carter for individuals with varying fitness levels.
+
+## where to find this feature event:
+click on the 'select intensity>' drop box to display the options.
+
+
+### advanced features: Record keeping (history of completed workouts)
+after the user has completed a series of exercise they can view a history of the workouts that they have completed be it premade exercises or custom exercises.
+
+## Why I have: record keeping 
+I have implemented this feature for the user to track their progress and also incentivise them to interact with the app and do some exercise.
+
+## where to find this feature event: 
+click the 'show workout history' button, it is intense by default.
+
+
+## AI
+
+
+### Prompts to automatically alternate between the exercise and the rest
+For the workout sequence feature I used a series of prompts to aid me in adding a rest in the even index position of the sequence so that if the user selects a premade exercise or creates a custom one they will have a time to rest inbetween exercises,e.g.
+1,    2,    3,    4,    5,    6     ....
+work, rest, work, rest, work, rest  .....etc.
+
+the prompts helped me fix my inability to find the even index positions, they include;
+
+> "fix me this code, I want the user to rest after each workout. the array is [30 , 10, 30,  10]  so work, rest, work, rest  below is my code" 
+
+<---- my pasted code to be fixed ---->
+
+
+this helped me remember modularity (%) i was then able to use the idea gotten from its response to devise a solution. i inserted at the even index 'item % 2 = 0' to fix the problem.
+
+> fix this code as index starts with zero and I want it to do the following [30, 10, 30, 10, 30, 10, 30] I want it to affect even positions not index so workout, rest, workout, rest .... in that order
+
+> it starts with rest
+
+
+
+### Prompts to update the payload with workout data after selection of the exercise and after removal of the exercsie.
+
+> how do i update the state of my exercise array when i click on the remove button of each selected workout
+
+the response was not as concise as i wanted but it gave me the idea to alter the entire array and send the new altered version which happened when ever the remove button on each exercise was clicked to the server as the user's final selections.
+
+I did the same for the custom exercises using the same function, nothing changes as rergards that logic
+
+### Prompts to craft personalised URLs for each user
+> how do i know the user john is the one logged in for example i want to greet the user on the userarea page?
+
+> actions on the userarea leads to a workout page and i want to do the same for that page
+
+this helped me create URLs for each user, it included their username and user ID which i used alot in personalising user specific user data across all of the pages accessible by each user
+
+
+### prompts to retrieve history data for each user 
+> why is my post  request yielding this history data: [object Object]
+
+> the data i am posting was sent  in this tree format client page 1 - server - client page 2 - server
+
+this helped me retieve exercise history data and populate the client with a list of their completed workouts consisting of exercise
+
+### Down side to this app
+I have attempted to let the user add an exercise both premade and custom alike to the list but in doing that i realised that making them share an array was creating a bug when i tried removing each exercise, the indexes where misplaced.
+
+I mitigated this by restricting the user from selecting a premade exercise after they had created a custom one an vice versa, i simply disabled the respective button and set their colours to grey to let the user know that they cannot be interacted with at the time.
+
+### how i improved my artefact since the prototype deadline.
+
+I have improved my artefact a great deal since the protoype deadline, as I feel i have now meet the core requirements as well as some advanced features while it is device and user friendly, I have done this to meet up with the core feature requirement and advanced feature. the feature I have added since then include;
+
+ - Create multiple activities / users can create multiple activities using premade workouts and the custom hub.
+ -  Start, stop and pause workouts. / the user can see & control what they do as well as being informed about change.
+- Visual cues
+- adjustable difficulty level
+- personalised record keeping
+- Better UI and UX.
+
+
+### Where to Find These Features
+- Building Workouts: Add exercises by selecting them or creating custom ones.
+- Starting Workouts: Click the 'Start Workout(s)' button to begin.
+- Visual Cues: Throughout the workout interface, providing guidance and information.
+- Adjustable Difficulty: Select the intensity level before starting a workout.
+- Record Keeping: Access workout history by clicking the 'Show Workout History' button.
